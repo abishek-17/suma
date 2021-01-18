@@ -1,16 +1,17 @@
-import {
-    createSlice
-} from "@reduxjs/toolkit";
-import {
-    save
-} from "./actions";
+import { createSlice} from "@reduxjs/toolkit";
+import {save} from "./actions";
 
 const data = createSlice({
     name: "data",
-    initialState: [],
+    initialState:[],
     extraReducers: {
         [save.type]: (data, action) => {
-            data = [...data,action.payload]
+            if(data.length===0){
+                data =[action.payload]
+                return data;
+            }
+            data = [...data,
+                action.payload]
             return data;
         },
     },

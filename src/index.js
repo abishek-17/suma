@@ -7,7 +7,6 @@ import Store from "./store/store"
 import reportWebVitals from './reportWebVitals';
 const store= Store()
 ReactDOM.render(
-
   <React.StrictMode>
     <Provider store={store}>
     <App />
@@ -15,6 +14,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-
 reportWebVitals();

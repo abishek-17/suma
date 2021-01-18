@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+//import { Redirect } from "react-router-dom";
+//import PropTypes from 'prop-types';
 //import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/styles';
+//import { withStyles } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,18 +17,21 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {savep} from '../store/patientdata/actions'
 import {connect} from "react-redux"
-import { Paper } from '@material-ui/core';
-class Appointment
- extends Component {
+//mport { Paper } from '@material-ui/core';
+class Appointment extends Component {
   state = {  
-    pat:{firstName:"",lastName:"",phonenumber:"",email:"",Stime:"07:30",Etime:"07:30",Cheifcomplaint:""}
+    patient:{firstName:"",lastName:"",phonenumber:"",email:"",Stime:"07:30",Etime:"07:30",Cheifcomplaint:""}
   }
-  handler=()=>{
-    this.props.savep(this.state.pat)
+  handler=(event)=>{
+    event.preventDefault()
+    console.log(this.state.patient)
+    this.props.savep(this.state.patient)
+    this.props.history.push("/view");
   }
   handledata=({target})=>{
     console.log(target.value,target.name)
-    this.setState({[target.name]:target.value})
+    let patient = {...this.state.patient,[target.name]:target.value}
+    this.setState({patient})
   }
   render() { 
   
@@ -49,7 +53,7 @@ class Appointment
                 fullWidth
                 id="firstName"
                 label="First Name"
-                value ={this.state.pat.firstName}
+                value ={this.state.patient.firstName}
                 onChange={this.handledata}
                 autoFocus
               />
@@ -62,7 +66,7 @@ class Appointment
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                value ={this.state.pat.lastName}
+                value ={this.state.patient.lastName}
                 onChange={this.handledata}
               />
             </Grid>
@@ -74,7 +78,7 @@ class Appointment
                 label="Phone Number"
                 name="phonenumber"
                 autoComplete="phonenumber"
-                value ={this.state.pat.phonenumber}
+                value ={this.state.patient.phonenumber}
                 onChange={this.handledata}
               />
             </Grid>
@@ -86,7 +90,7 @@ class Appointment
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                value ={this.state.pat.email}
+                value ={this.state.patient.email}
                 onChange={this.handledata}
               />
             </Grid>
@@ -100,7 +104,7 @@ class Appointment
                // className={classes.textField}
                 InputLabelProps={{shrink: true,}}
                 inputProps={{step: 300,}}
-                value ={this.state.pat.Stime}
+                value ={this.state.patient.Stime}
                 onChange={this.handledata}
             />
             </Grid>
@@ -114,7 +118,7 @@ class Appointment
                 //className={classes.textField}
                 InputLabelProps={{shrink: true,}}
                 inputProps={{step: 300,}}
-                value ={this.state.pat.Etime}
+                value ={this.state.patient.Etime}
                 onChange={this.handledata}
             />
             </Grid>
@@ -126,7 +130,7 @@ class Appointment
                 label="Cheif complaint"
                 name="Cheifcomplaint"
                 autoComplete="Cheifcomplaint"
-                value ={this.state.pat.Cheifcomplaint}
+                value ={this.state.patient.Cheifcomplaint}
                 onChange={this.handledata}
               />
             </Grid>
@@ -150,13 +154,10 @@ class Appointment
   }
 }
 const mapStateToProps = (state) => {
-  const { data} = state;
-  return { data };
+  const {data} = state;
+  return {data};
 };
-
-
 const mapDispatchToProps = (dispatch) => ({
   savep: (data) => dispatch(savep(data)),
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(Appointment);

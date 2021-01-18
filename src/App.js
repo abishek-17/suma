@@ -5,7 +5,6 @@ import './App.css'
 import Nav from './components/Nav'
 import {BrowserRouter as Router,Switch,Route}from 'react-router-dom';
 class App extends Component {
-
   render() { 
     return (  
       <Router>

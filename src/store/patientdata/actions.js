@@ -1,7 +1,4 @@
-import {
-    createAction
-} from '@reduxjs/toolkit';
-
+import { createAction} from '@reduxjs/toolkit';
 const save = createAction("savedata");
 const savep = (data) => {
     return {
@@ -11,9 +8,4 @@ const savep = (data) => {
         }
     }
 }
-
-
-export {
-    save,
-    savep
-};
+export {save,savep};
